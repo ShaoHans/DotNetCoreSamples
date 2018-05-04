@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CommandLineConfiguration": {
+      "commandName": "Project",
+      "commandLineArgs": "name=shz age=18"
+    }
+  }
+}
