@@ -1,0 +1,13 @@
+﻿@model OptionsBind.Class
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<h3>@Model.ClassName</h3>
+
+@foreach (var s in Model.Students)
+{
+    <div>@($"{s.Name}的年龄是{s.Age}")</div>
+}
+
