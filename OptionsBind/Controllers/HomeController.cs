@@ -11,7 +11,8 @@ namespace OptionsBind.Controllers
     {
         private readonly Class MyClass;
 
-        public HomeController(IOptions<Class> optionsAccesser)
+        // IOptionsSnapshot热加载
+        public HomeController(IOptionsSnapshot<Class> optionsAccesser)
         {
             MyClass = optionsAccesser.Value;
         }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace OptionsBind
+namespace 使用Autofac替换自带的DI容器
 {
     public class Program
     {
@@ -19,11 +19,6 @@ namespace OptionsBind
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                //.ConfigureAppConfiguration(config =>
-                //{
-                //    // 覆盖默认配置
-                //    config.AddJsonFile("appsettings.json", false, false);
-                //})
                 .UseStartup<Startup>()
                 .Build();
     }
