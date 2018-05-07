@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "使用Autofac替换自带�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "请求管道原理", "自定义请求管道\请求管道原理.csproj", "{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cookie认证授权", "Cookie认证授权\Cookie认证授权.csproj", "{FE37A4E1-ACE2-4E21-AB14-542D71E77CAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jwt认证与授权", "Jwt认证与授权\Jwt认证与授权.csproj", "{EC882CB7-EFD7-4BFA-A266-6455724354DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,14 @@ Global
 		{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE37A4E1-ACE2-4E21-AB14-542D71E77CAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE37A4E1-ACE2-4E21-AB14-542D71E77CAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE37A4E1-ACE2-4E21-AB14-542D71E77CAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE37A4E1-ACE2-4E21-AB14-542D71E77CAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC882CB7-EFD7-4BFA-A266-6455724354DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC882CB7-EFD7-4BFA-A266-6455724354DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC882CB7-EFD7-4BFA-A266-6455724354DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC882CB7-EFD7-4BFA-A266-6455724354DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
