@@ -1,5 +1,9 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace 自定义请求管道
+namespace 请求管道原理
 {
+    public delegate Task RequestDelegate(Context context);
 }

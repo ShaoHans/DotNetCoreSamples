@@ -13,9 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configurat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DI", "DI", "{15ACEED0-F7AF-45AE-A62B-262C553FF920}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "使用DotNetCore自带的DI容器", "使用DotNetCore自带的DI容器\使用DotNetCore自带的DI容器.csproj", "{25B6F495-E8B2-4E6A-B387-923B8611FC8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "使用DotNetCore自带的DI容器", "使用DotNetCore自带的DI容器\使用DotNetCore自带的DI容器.csproj", "{25B6F495-E8B2-4E6A-B387-923B8611FC8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "使用Autofac替换自带的DI容器", "使用Autofac替换自带的DI容器\使用Autofac替换自带的DI容器.csproj", "{FCF36AED-B0DE-434F-B920-883AB739AE93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "使用Autofac替换自带的DI容器", "使用Autofac替换自带的DI容器\使用Autofac替换自带的DI容器.csproj", "{FCF36AED-B0DE-434F-B920-883AB739AE93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "请求管道原理", "自定义请求管道\请求管道原理.csproj", "{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{FCF36AED-B0DE-434F-B920-883AB739AE93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCF36AED-B0DE-434F-B920-883AB739AE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCF36AED-B0DE-434F-B920-883AB739AE93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7C06437-E28C-44C5-99D4-3C71BAC03B0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
