@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
+using Cookie认证授权.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cookie认证授权
 {
@@ -27,6 +30,23 @@ namespace Cookie认证授权
                 {
                     options.LoginPath = "/account/login";
                 });
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection"));
+            });
+
+            services.AddIdentity<AppUser, AppRole>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            });
+
             services.AddMvc();
         }
 
