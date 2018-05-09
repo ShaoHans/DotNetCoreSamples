@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Cookie认证授权.Data;
 
 namespace Cookie认证授权
 {
@@ -14,7 +15,12 @@ namespace Cookie认证授权
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            BuildWebHost(args)
+                .MigrateDbContext<AppIdentityDbContext>((context, service) =>
+                {
+                    new AppIdentityDbContextSeed().SeedAsync(context, service).Wait();
+                })
+                .Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
