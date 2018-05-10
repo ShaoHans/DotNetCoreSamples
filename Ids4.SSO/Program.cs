@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Ids4.SSO.Data;
 
 namespace Ids4.SSO
 {
@@ -14,7 +15,12 @@ namespace Ids4.SSO
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            BuildWebHost(args)
+                .MigrateDbContext<AppIdentityDbContext>((context,service)=>
+                {
+                    new AppIdentityDbContextSeed().SeedAsync(context, service).Wait();
+                })
+                .Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
