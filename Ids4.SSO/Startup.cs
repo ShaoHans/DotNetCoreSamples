@@ -10,6 +10,8 @@ using IdentityServer4;
 using Ids4.SSO.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using IdentityServer4.Services;
+using Ids4.SSO.Services;
 
 namespace Ids4.SSO
 {
@@ -49,6 +51,8 @@ namespace Ids4.SSO
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 //.AddTestUsers(Config.GetTestUsers());
                 .AddAspNetIdentity<AppUser>();
+
+            services.AddScoped<IProfileService, ProfileService>();
 
             services.AddMvc();
         }

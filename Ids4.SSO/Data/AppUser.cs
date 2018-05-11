@@ -8,5 +8,6 @@ namespace Ids4.SSO.Data
 {
     public class AppUser : IdentityUser<int>
     {
+        public string Avatar { get; set; }
     }
 }

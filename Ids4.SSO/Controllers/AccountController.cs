@@ -78,6 +78,12 @@ namespace Ids4.SSO.Controllers
             return RedirectToLocal();
         }
 
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
         public IActionResult RedirectToLocal(string returnUrl= "")
         {
             if (Url.IsLocalUrl(returnUrl))
