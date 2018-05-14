@@ -1,0 +1,24 @@
+﻿version: '3'
+
+services:
+  db:
+    image: mysql/mysql-server
+    container_name: membercenterdb
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 1qa2ws3ed
+      MYSQL_USER: shz
+      MYSQL_PASSWORD: 1qa2ws3ed
+    volumes:
+      - /docker/mysql/membercenterdb/mysql_init:/docker-entrypoint-initdb.d
+
+  web:
+    build: .
+    container_name: membercenterweb
+    ports:
+      - '8000:80'
+    depends_on:
+      - db
