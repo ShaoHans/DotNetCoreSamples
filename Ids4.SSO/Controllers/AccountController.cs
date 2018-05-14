@@ -1,21 +1,30 @@
 ﻿using IdentityServer4.Test;
+using Ids4.SSO.Data;
 using Ids4.SSO.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer4.Services;
 
 namespace Ids4.SSO.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly TestUserStore _userStore;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IIdentityServerInteractionService _identityServerInteractionService;
 
-        public AccountController(TestUserStore userStore)
+        public AccountController(SignInManager<AppUser> singInManager
+            , UserManager<AppUser> userManager
+            ,IIdentityServerInteractionService identityServerInteractionService)
         {
-            _userStore = userStore;
+            _signInManager = singInManager;
+            _userManager = userManager;
+            _identityServerInteractionService = identityServerInteractionService;
         }
 
         [HttpGet]
@@ -30,26 +39,28 @@ namespace Ids4.SSO.Controllers
         {
             if(ModelState.IsValid)
             {
-                TestUser user = _userStore.FindByUsername(model.UserName);
+                AppUser user = await _userManager.FindByNameAsync(model.UserName);
                 if(user == null)
                 {
                     ModelState.AddModelError(nameof(model.UserName), "用户名错误");
                 }
                 else
                 {
-                    if(_userStore.ValidateCredentials(user.Username, model.Password))
+                    if(await _userManager.CheckPasswordAsync(user, model.Password))
                     {
-                        await Microsoft.AspNetCore.Http.AuthenticationManagerExtensions.SignInAsync(
-                            HttpContext,
-                            user.SubjectId,
-                            user.Username,
+                        await _signInManager.SignInAsync(
+                            user,
                             new AuthenticationProperties
                             {
                                 IsPersistent = true,
                                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(45)
                             }
                             );
-                        return RedirectToLocal(returnUrl);
+
+                        if(_identityServerInteractionService.IsValidReturnUrl(returnUrl))
+                        {
+                            return RedirectToLocal(returnUrl);
+                        }
                     }
                     else
                     {
@@ -63,8 +74,14 @@ namespace Ids4.SSO.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync();
+            await _signInManager.SignOutAsync();
             return RedirectToLocal();
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
         }
 
         public IActionResult RedirectToLocal(string returnUrl= "")

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +38,8 @@ namespace Ids4.WebA
                  options.ClientId = "client_001";
                  options.ClientSecret = "secret_001";
                  options.SaveTokens = true;
+
+                 options.ClaimActions.MapJsonKey("sub", "id");
              });
         }
 
