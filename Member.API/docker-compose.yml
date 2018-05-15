@@ -1,4 +1,4 @@
-﻿version: '3'
+﻿version: '2'
 
 services:
   db:
@@ -20,5 +20,7 @@ services:
     container_name: membercenterweb
     ports:
       - '8000:80'
+    volumes: 
+      - /docker/membercenterweb/config/appsettings.json:/app/appsettings.json
     depends_on:
       - db
