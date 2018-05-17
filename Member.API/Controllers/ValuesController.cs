@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Member.API.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.JsonPatch;
+using Member.API.Data.Entities;
 
 namespace Member.API.Controllers
 {
@@ -25,5 +27,14 @@ namespace Member.API.Controllers
             return Json(await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id));
         }
         
+        [HttpPatch]
+        public async Task<IActionResult> Patch([FromBody]JsonPatchDocument<User> patch)
+        {
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == 1);
+            patch.ApplyTo(user);
+            _dbContext.Users.Update(user);
+            _dbContext.SaveChanges();
+            return Json(user);
+        }
     }
 }
