@@ -7,17 +7,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.JsonPatch;
 using Member.API.Data.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace Member.API.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class UserController : Controller
     {
         private readonly MemberDbContext _dbContext;
+        private readonly ILogger<UserController> _logger;
 
-        public ValuesController(MemberDbContext dbContext)
+        public UserController(MemberDbContext dbContext, ILogger<UserController> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         // GET api/values
