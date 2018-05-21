@@ -8,10 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.JsonPatch;
 using Member.API.Data.Entities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Member.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     public class UserController : Controller
     {
         private readonly MemberDbContext _dbContext;
@@ -42,6 +43,7 @@ namespace Member.API.Controllers
 
         [Route("get-or-create")]
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> GetOrCreate(string phone)
         {
             // 参数检查
