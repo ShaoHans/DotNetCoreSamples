@@ -18,6 +18,7 @@ namespace Member.API.Data
         {
             modelBuilder.Entity<User>().ToTable("User").HasKey(u => u.Id);
             modelBuilder.Entity<User>().Property(u => u.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<User>().Property(u => u.Phone).IsRequired().HasMaxLength(20);
             modelBuilder.Entity<User>().Property(u => u.Name).HasMaxLength(20).IsRequired();
             modelBuilder.Entity<User>().Property(u => u.Company).HasMaxLength(200);
             modelBuilder.Entity<User>().Property(u => u.Position).HasMaxLength(100);

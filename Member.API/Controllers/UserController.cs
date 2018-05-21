@@ -39,5 +39,26 @@ namespace Member.API.Controllers
             _dbContext.SaveChanges();
             return Json(user);
         }
+
+        [Route("get-or-create")]
+        [HttpPost]
+        public async Task<IActionResult> GetOrCreate(string phone)
+        {
+            // 参数检查
+
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Phone.Equals(phone));
+            if(user == null)
+            {
+                user = new User
+                {
+                    Name = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"),
+                    Phone = phone
+                };
+                _dbContext.Users.Add(user);
+                await _dbContext.SaveChangesAsync();
+            }
+
+            return Json(user);
+        }
     }
 }

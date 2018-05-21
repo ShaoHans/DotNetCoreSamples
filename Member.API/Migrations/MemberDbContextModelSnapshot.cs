@@ -30,6 +30,10 @@ namespace Member.API.Migrations
                         .IsRequired()
                         .HasMaxLength(20);
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
                     b.Property<string>("Position")
                         .HasMaxLength(100);
 

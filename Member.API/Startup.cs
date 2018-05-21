@@ -42,22 +42,7 @@ namespace Member.API
             }
 
             app.UseMvc();
-            InitUser(app);
         }
 
-        private void InitUser(IApplicationBuilder app)
-        {
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetRequiredService<MemberDbContext>();
-                context.Database.Migrate();
-
-                if(!context.Users.Any())
-                {
-                    context.Users.Add(new Data.Entities.User { Name = "shz" });
-                    context.SaveChanges();
-                }
-            }
-        }
     }
 }
