@@ -3,19 +3,23 @@
     {
       "DownstreamPathTemplate": "/api/user",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          //Member.API项目部署地址
-          "Host": "localhost",
-          "Port": 5000
-        }
-      ],
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    //Member.API项目部署地址
+      //    "Host": "localhost",
+      //    "Port": 5000
+      //  }
+      //],
       "UpstreamPathTemplate": "/user",
       "UpstreamHttpMethod": [ "Get" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "TestKey",
         "AllowedScopes": []
-      }
+      },
+      // 使用Consul服务发现，不需要配置上面的API接口地址
+      "ServiceName": "MemberServiceApi",
+      "LoadBalancer": "LeastConnection",
+      "UseServiceDiscovery": true
     },
     {
       "DownstreamPathTemplate": "/connect/token",
@@ -32,6 +36,10 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5002"
+    "BaseUrl": "http://localhost:5002",
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500
+    }
   }
 }

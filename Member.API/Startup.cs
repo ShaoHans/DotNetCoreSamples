@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Consul;
 using Member.API.Data;
+using Member.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +32,22 @@ namespace Member.API
                 options.UseMySQL(Configuration.GetConnectionString("MemberCenterConnection"));
             });
 
+            // 配置Consul服务注册地址
+            services.Configure<ServiceDiscoveryOptions>(Configuration.GetSection("ServiceDiscovery"));
+            // 配置Consul客户端
+            services.AddSingleton<IConsulClient>(service =>
+            new ConsulClient
+            (
+                config =>
+                {
+                    var serviceDisOptions = service.GetRequiredService<IOptions<ServiceDiscoveryOptions>>().Value;
+                    if (!string.IsNullOrWhiteSpace(serviceDisOptions.Consul.HttpEndpoint))
+                    {
+                        config.Address = new Uri(serviceDisOptions.Consul.HttpEndpoint);
+                    }
+                }
+            ));
+
             services.AddMvc();
         }
 
@@ -40,8 +58,8 @@ namespace Member.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseMvc();
+            app.UseConsul();
         }
 
     }
