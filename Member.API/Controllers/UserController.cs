@@ -62,5 +62,35 @@ namespace Member.API.Controllers
 
             return Json(user);
         }
+
+        [HttpPost]
+        [Route("search/{phone}")]
+        public async Task<IActionResult> Seach(string phone)
+        {
+            return Json(await _dbContext.Users.Where(u => u.Phone.Equals(phone)).ToListAsync());
+        }
+
+        [HttpGet]
+        [Route("tags")]
+        public async Task<IActionResult> GetUserTags()
+        {
+            return Json(await _dbContext.UserTags.Where(t => t.UserId == 1).ToListAsync());
+        }
+
+        [HttpPut]
+        [Route("update/tags")]
+        public async Task<IActionResult> UpdateUserTags([FromBody]List<string> tags)
+        {
+            var originTags = await _dbContext.UserTags.Where(u => u.UserId == 1).ToListAsync();
+            var newTags = tags.Except(originTags.Select(t => t.Tag));
+            _dbContext.UserTags.AddRange(newTags.Select(t => new UserTag
+            {
+                UserId = 1,
+                Tag = t,
+                CreateTime = DateTime.Now
+            }));
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

@@ -10,9 +10,10 @@ using System;
 namespace Member.API.Migrations
 {
     [DbContext(typeof(MemberDbContext))]
-    partial class MemberDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180526095806_AddUserTagTable")]
+    partial class AddUserTagTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

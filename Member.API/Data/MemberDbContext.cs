@@ -23,9 +23,15 @@ namespace Member.API.Data
             modelBuilder.Entity<User>().Property(u => u.Company).HasMaxLength(200);
             modelBuilder.Entity<User>().Property(u => u.Position).HasMaxLength(100);
 
+            modelBuilder.Entity<UserTag>().ToTable("UserTag").HasKey(t => t.TagId);
+            modelBuilder.Entity<UserTag>().Property(u => u.TagId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<UserTag>().Property(t => t.Tag).IsRequired().HasMaxLength(100);
+
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<UserTag> UserTags { get; set; }
     }
 }
