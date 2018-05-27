@@ -5,6 +5,7 @@ using IdentityServer4.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Identity.API
@@ -48,7 +49,15 @@ namespace Identity.API
                 return;
             }
 
-            context.Result = new GrantValidationResult(user.Id.ToString(), GrantType);
+            var claims = new Claim[]
+            {
+                new Claim("name",user.Name),
+                new Claim("company",user.Company),
+                new Claim("position",user.Position),
+                new Claim("phone",user.Phone),
+
+            };
+            context.Result = new GrantValidationResult(user.Id.ToString(), GrantType, claims);
 
         }
     }
