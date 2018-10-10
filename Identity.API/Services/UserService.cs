@@ -22,7 +22,7 @@ namespace Identity.API.Services
         {
             _dns = dns;
             _options = options.Value;
-            SetUserServiceHostUrl();
+            SetUserServiceHostUrl().Wait();
         }
 
         private async Task SetUserServiceHostUrl()
